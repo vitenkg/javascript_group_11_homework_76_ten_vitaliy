@@ -39,11 +39,11 @@ const Reducer = (state = initialState, action) => {
         case FETCH_NEW_MESSAGE_FAiLURE:
             return {...state, fetchLoading: false};
         case POST_MESSAGE_REQUEST:
-            return {...state,};
+            return {...state, fetchLoading: true};
         case  POST_MESSAGE_SUCCESS:
-            return {...state};
+            return {...state, fetchLoading: false };
         case POST_MESSAGE_FAILURE:
-            return {...state, errorSentMessage: action.payload}
+            return {...state, fetchLoading: false, errorSentMessage: action.payload}
         case CHANGE_MESSAGE_VALUE:
             return {...state, newMessage: action.payload};
         case INPUT_FILL_ERASE:
