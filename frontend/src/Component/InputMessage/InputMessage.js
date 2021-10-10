@@ -13,11 +13,11 @@ const useStyles = makeStyles((theme) => ({
 
 const InputMessage = ({error, newMessage, onChangeInput, onSubmitForm}) => {
     const classes = useStyles();
-    const [warningText,setWarningText] = useState('');
+    const [warningText, setWarningText] = useState('');
 
-    useEffect(()=> {
+    useEffect(() => {
         if (error) {
-            setWarningText('Empty Text Field');
+            setWarningText('Пустое сообщение');
         } else {
             setWarningText("");
         }
@@ -31,23 +31,30 @@ const InputMessage = ({error, newMessage, onChangeInput, onSubmitForm}) => {
                 autoComplete="off"
                 onSubmit={onSubmitForm}
             >
-                <TextField
-                    error={error}
-                    id="inputPost"
-                    label="Введите сооющение"
-                    value={newMessage}
-                    onChange={onChangeInput}
-                    variant="outlined"
-                    helperText={warningText}
-                    rows={4}
-                    multiline
-                />
-                <Button
-                    type="submit"
-                    variant="outlined"
-                >
-                    Отправить
-                </Button>
+                <Grid container justifyContent="space-between" alignItems="center">
+                    <Grid item>
+                        <TextField
+                            error={error}
+                            id="inputPost"
+                            label="Введите сооющение"
+                            value={newMessage}
+                            onChange={onChangeInput}
+                            variant="outlined"
+                            helperText={warningText}
+                            rows={4}
+                            multiline
+                        />
+                    </Grid>
+                    <Grid item spasing={2}>
+                        <Button
+
+                            type="submit"
+                            variant="outlined"
+                        >
+                            Отправить
+                        </Button>
+                    </Grid>
+                </Grid>
             </form>
         </Grid>
     );
