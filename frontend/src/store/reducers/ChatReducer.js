@@ -2,8 +2,14 @@ import {
     CHANGE_MESSAGE_VALUE,
     FETCH_MESSAGES_FAiLURE,
     FETCH_MESSAGES_REQUEST,
-    FETCH_MESSAGES_SUCCESS, FETCH_NEW_MESSAGE_FAiLURE,
-    FETCH_NEW_MESSAGE_REQUEST, FETCH_NEW_MESSAGE_SUCCESS, INPUT_FILL_ERASE
+    FETCH_MESSAGES_SUCCESS,
+    FETCH_NEW_MESSAGE_FAiLURE,
+    FETCH_NEW_MESSAGE_REQUEST,
+    FETCH_NEW_MESSAGE_SUCCESS,
+    INPUT_FILL_ERASE,
+    POST_MESSAGE_FAILURE,
+    POST_MESSAGE_REQUEST,
+    POST_MESSAGE_SUCCESS
 } from "../Actions/ChatAction";
 
 const initialState = {
@@ -15,6 +21,7 @@ const initialState = {
     }],
     newMessage: '',
     fetchLoading: false,
+    errorSentMessage: null,
 };
 
 const Reducer = (state = initialState, action) => {
@@ -31,10 +38,16 @@ const Reducer = (state = initialState, action) => {
             return {...state, fetchLoading: false, messages: [...state.messages.concat(action.payload)]};
         case FETCH_NEW_MESSAGE_FAiLURE:
             return {...state, fetchLoading: false};
+        case POST_MESSAGE_REQUEST:
+            return {...state,};
+        case  POST_MESSAGE_SUCCESS:
+            return {...state};
+        case POST_MESSAGE_FAILURE:
+            return {...state, errorSentMessage: action.payload}
         case CHANGE_MESSAGE_VALUE:
             return {...state, newMessage: action.payload};
         case INPUT_FILL_ERASE:
-            return {...state, newMessage: ''};
+            return {...state, newMessage: '', errorSentMessage: null};
         default:
             return state;
     }

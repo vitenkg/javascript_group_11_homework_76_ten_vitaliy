@@ -3,13 +3,14 @@ import InputMessage from "../../Component/InputMessage/InputMessage";
 import DisplayMessages from "../../Component/DisplayMessages/DisplayMessages";
 import './Chat.css';
 import {useDispatch, useSelector} from "react-redux";
-import {changeMessageValue, fetchMessageRec, fetchMessages, fetchNewMessage} from "../../store/Actions/ChatAction";
+import {changeMessageValue, fetchMessages, fetchNewMessage, postNewMessage} from "../../store/Actions/ChatAction";
 
 
 const Chat = () => {
     const dispatch = useDispatch();
     const messages = useSelector(state => state.chat.messages);
     const newMessage = useSelector(state => state.chat.newMessage);
+    const errorPost = useSelector(state => state.chat.errorSentMessage)
 
     useEffect(() => {
         dispatch(fetchMessages());
@@ -26,7 +27,7 @@ const Chat = () => {
 
     const inputSubmitForm = async (e) => {
         e.preventDefault();
-        dispatch(fetchMessageRec({author: 'Writer', message: newMessage}));
+        dispatch(postNewMessage({author: 'Writer', message: newMessage}));
 
     };
 
@@ -43,6 +44,7 @@ const Chat = () => {
                     messages={messages}
                 />
                 <InputMessage
+                    error={errorPost}
                     onSubmitForm = {inputSubmitForm}
                     newMessage={newMessage}
                     onChangeInput={onChangeHandler}
